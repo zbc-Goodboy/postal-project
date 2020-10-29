@@ -93,7 +93,7 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select    <include refid="Base_Column_List" /> from invitation order by createdate desc
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectLikename" resultMap="BaseResultMap">
     select    <include refid="Base_Column_List" /> from invitation where title like concat('%',#{name},'%')
   </select>
 </mapper>

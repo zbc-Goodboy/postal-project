@@ -47,9 +47,13 @@
             text-decoration: underline;
             cursor: pointer;
         }
-        #kg>span:hover{
+        #kg>span:hover,.jhd:hover{
             color: gray;
             text-decoration: none;
+        }
+        .jhd{
+            color: dodgerblue;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -77,29 +81,52 @@
     var pageNo=1;
     var pages=0;
     var select="";
+    $(function () {
+        show()
+        $("#kg>span:nth-of-type(1)").click(function () {
+            pageNo=1;
+            show()
+        });
+        $("#kg>span:nth-of-type(2)").click(function () {
+            pageNo=pageNo-1;
+            show()
+        });
+        $("#kg>span:nth-of-type(3)").click(function () {
+            pageNo=pageNo+1;
+            show()
+        });
+        $("#kg>span:nth-of-type(4)").click(function () {
+            pageNo=pages;
+            show();
+        });
+    })
     function show(){
+        $("tr:gt(2)").remove()
+        if (select==""){
+            select=null;
+        }
         $("input[name=title]").val(select)
         $.ajax({
             url: "zzx",
             data: "sdd="+select+"&pageNo="+pageNo,
             dataType: "json",
-            success: function(painfo){
+            success: function(pageinfo){
                 pages=pageinfo.pages;
-            $("#kj>span:nth-of-type(1)").html(painfo.pageNum);
-            $("#kj>span:nth-of-type(2)").html(painfo.pages);
+            $("#kj>span:nth-of-type(1)").html(pageinfo.pageNum);
+            $("#kj>span:nth-of-type(2)").html(pageinfo.pages);
             $("#kg>span").show();
-                if (pageinfo.isFirstPage==true){
-                    $("#kg>span:nth-of-type(1)").hide();
-                    $("#kg>span:nth-of-type(2)").hide();
+            if (pageinfo.isFirstPage==true){
+                $("#kg>span:nth-of-type(1)").hide();
+                $("#kg>span:nth-of-type(2)").hide();
 
                 }
                 if (pageinfo.isLastPage==true){
                     $("#kg>span:nth-of-type(3)").hide();
                     $("#kg>span:nth-of-type(4)").hide();
                 }
-                var data = painfo.list;
+                var data = pageinfo.list;
                 for (var i=0;i<data.length;i++){
-                    var tr=$("<tr></tr>")
+                    var tr=$("<tr class='kb'></tr>")
                     var td1 =$("<td>"+data[i].title+"</td>")
                     var td2 =$("<td>"+data[i].summary+"</td>")
                     var td3 =$("<td>"+data[i].author+"</td>")

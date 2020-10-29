@@ -30,9 +30,13 @@ public class TestController {
     @RequestMapping("zzx")
     @ResponseBody
     public PageInfo findAllDUser(String sdd, Integer pageNo){
-        PageHelper.offsetPage((pageNo-1)*4,4);
+        if (sdd.equals("null")){
+            sdd=null;
+        }
+        PageHelper.offsetPage((pageNo-1)*3,3);
         List<Invitation> duserList=invitationService.findAll();
-        if (sdd!=null&&sdd!=""){
+        if (sdd!=null){
+            System.out.println("dsad");
             duserList=invitationService.findLikename(sdd);
         }
         PageInfo<Invitation> pageInfo=new PageInfo<Invitation>(duserList);
