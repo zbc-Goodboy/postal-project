@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin: 0;padding: 0}
+        body{
+            margin: 0 auto;
+            text-align: center;
+        }
+        table{
+            display: inline-block;
+            margin-top: 60px;
+        }
+        #lie{
+            width: 800px;
+            text-align: center;
+            font-size: 50px;
+            line-height: 100px;
+        }
+        #kl{
+            font-size: 20px;
+            line-height: 40px;
+        }
+        .k{
+            font-size: 15px;
+            line-height: 30px;
+        }
+        .kb:nth-of-type(odd){
+            background-color: #95F9FE;
+        }
+        .k{
+            background-color: #83C3F8;
+        }
+        #kj,#kg{
+            display: inline-block;
+        }
+        #kj{
+           margin-left: 0px;
+        }
+        #kg{
+            margin-left: 500px;
+        }
+        #kg>span{
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #kg>span:hover{
+            color: gray;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th colspan="5"><p id="lie">帖子列表</p></th>
+        </tr>
+        <tr>
+            <th colspan="5"><div id="kl"><span>帖子标题:</span><input name="title" type="text"><input id="submit" type="button" value="搜索"></div></th>
+        </tr>
+        <tr class="k">
+            <td>标题</td>
+            <td>内容摘要</td>
+            <td>作者</td>
+            <td>发布时间</td>
+            <td>操作</td>
+        </tr>
+    </table>
+   <div><div id="kj">第<span></span>/<span></span>页</div><div id="kg"><span>首页</span><span>上一页</span><span>下一页</span><span>末页</span></div></div>
+</body>
+</html>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    var pageNo=1;
+    var pages=0;
+    var select="";
+    function show() {
+
+    }
+</script>
