@@ -77,7 +77,38 @@
     var pageNo=1;
     var pages=0;
     var select="";
-    function show() {
+    function show(){
+        $("input[name=title]").val(select)
+        $.ajax({
+            url: "zzx",
+            data: "sdd="+select+"&pageNo="+pageNo,
+            dataType: "json",
+            success: function(painfo){
+                pages=pageinfo.pages;
+            $("#kj>span:nth-of-type(1)").html(painfo.pageNum);
+            $("#kj>span:nth-of-type(2)").html(painfo.pages);
+            $("#kg>span").show();
+                if (pageinfo.isFirstPage==true){
+                    $("#kg>span:nth-of-type(1)").hide();
+                    $("#kg>span:nth-of-type(2)").hide();
 
+                }
+                if (pageinfo.isLastPage==true){
+                    $("#kg>span:nth-of-type(3)").hide();
+                    $("#kg>span:nth-of-type(4)").hide();
+                }
+                var data = painfo.list;
+                for (var i=0;i<data.length;i++){
+                    var tr=$("<tr></tr>")
+                    var td1 =$("<td>"+data[i].title+"</td>")
+                    var td2 =$("<td>"+data[i].summary+"</td>")
+                    var td3 =$("<td>"+data[i].author+"</td>")
+                    var td4 =$("<td>"+data[i].createdate+"</td>")
+                    var td6 =$("<th><span class='jhd' vinid='"+data[i].id+"'>查看回复</span></th>")
+                    tr.append(td1).append(td2).append(td3).append(td4).append(td6)
+                    $("table").append(tr)
+                }
+        }}
+        )
     }
 </script>
