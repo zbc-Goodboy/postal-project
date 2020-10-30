@@ -48,6 +48,9 @@
             color: gray;
             text-decoration: none;
         }
+        .kb:nth-of-type(odd){
+            background-color: #95F9FE;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +59,7 @@
             <th colspan="5"><p id="lie">回复信息列表</p><p id="fff"></p></th>
         </tr>
         <tr>
-            <th colspan="5"><div id="jnh"><a href="">添加回复</a><a href="/">返回帖子列表</a></div></th>
+            <th colspan="5"><div id="jnh"><a href="show2.html">添加回复</a><a href="/">返回帖子列表</a></div></th>
         </tr>
         <tr class="k">
             <td>回复内容</td>
@@ -70,10 +73,12 @@
 <script>
     $(function(){
         kjl()
+        message()
+        dada()
     })
     function kjl(){
         $.ajax({
-            url: "jhg",
+            url: "kjd",
             dataType: "json",
             success:function(data){
                 for (var i=0;i<data.length;i++){
@@ -84,6 +89,21 @@
                     tr.append(td1).append(td2).append(td3)
                     $("table").append(tr)
                 }
+            }
+        })
+    }
+    function message() {
+        $.ajax({
+            url: "jhg",
+            success:function(data){
+                $("#fff").html(data)
+            }
+        })
+    }
+    function dada() {
+        $.ajax({
+            url: "kjl",
+            success:function(data){
             }
         })
     }

@@ -18,12 +18,12 @@
         #lie{
             text-align: center;
             width: 800px;
-            font-size: 30px;
+            font-size: 20px;
             line-height: 60px;
         }
-        .k{
+        .k,#back{
             font:normal bold 20px "新宋体";
-            l
+
         }
         tr:nth-of-type(1){
             background-color: #83C3F8;
@@ -33,7 +33,7 @@
            display: inline-block;
            margin-left: 320px;
        }
-        input[type=button]{
+        input[type=button],{
             font-size: 20px;
             line-height: 40px;
             display: inline-block;
@@ -42,6 +42,7 @@
     </style>
 </head>
 <body>
+    <form action="add" method="post">
     <table border="1">
         <tr>
             <th colspan="5"><p id="lie">添加回复</p></th>
@@ -52,20 +53,34 @@
         </tr>
         <tr class="k">
             <th>回复昵称:</th>
-            <td><input name="nicheng" height="30" width="10"></td>
+            <td><input name="author" height="30" width="10" pattern="^[u4e00-u9fa5],{0,}$"></td>
         </tr>
         <tr class="k">
-            <td colspan="2"><div id="add"><input type="submit" value="提交"><input type="button" value="返回"></div></td>
+            <td colspan="2"><div id="add"><input type="submit" value="提交"><input  type="button" value="返回"></div></td>
         </tr>
     </table>
+        </form>
    </body>
 </html>
 <script src="jquery-2.2.4.js"></script>
 <script>
-    var pageNo=1;
-    var pages=0;
-    var select="";
-    function show() {
+    $(function () {
+        $("form").submit(function () {
+            if ($("input[name=author]").val()==""){
+                $("input[name=author]").val("匿名用户")
+            }
+        }
+        $("input[type=button]").click(function(){
+            window.location.href="http://localhost:8080/show1.html"
+        })
+        $("input[name=author]").blur(function(){
+            if ($(this).val()==""){
+                $(this).val("匿名用户")
 
-    }
+            }
+            if($(this)[0].validity.patternMismatch==true){
+                $(this)[0].setCustomValidity("只能输入中文或不填");
+            }
+        })
+    })
 </script>

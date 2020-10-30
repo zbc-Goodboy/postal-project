@@ -8,7 +8,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -43,18 +45,22 @@ public class TestController {
         return pageInfo;
     }
     //添加评论
-    @RequestMapping("add")
+    @PostMapping(value = "add")
     public String add(String content, String author, HttpSession session){
+
         Long id = (Long) session.getAttribute("invid");
         ReplyDetail replyDetail = new ReplyDetail();
         replyDetail.setAuthor(author);
+        if (author.equals("")){
+            replyDetail.setAuthor("匿名用户");
+        }
         replyDetail.setContent(content);
         replyDetail.setCreatedate(new Date());
         replyDetail.setInvid(id);
         if (replyDetailService.add(replyDetail)>0){
             session.setAttribute("message","添加回复成功");
         }
-        return "show1";
+        return "redirect:/show1.html";
     }
     //存储当前帖子id并跳转到评论页面
     @RequestMapping("watch")
@@ -65,7 +71,7 @@ public class TestController {
     //通过帖子id查看相关评论
     @RequestMapping("kjd")
     @ResponseBody
-    public Object kjl(HttpSession session){
+    public Object kjd(HttpSession session){
         Long id = (Long) session.getAttribute("invid");
         List<ReplyDetail> replyDetailList = replyDetailService.findByinvid(id);
         return replyDetailList;
@@ -76,5 +82,11 @@ public class TestController {
     public Object jhh(HttpSession session){
         String message = (String) session.getAttribute("message");
         return message;
+    }
+    @RequestMapping("kjl")
+    @ResponseBody
+    public Object kjl(HttpSession session){
+        session.removeAttribute("message");
+        return null;
     }
 }
