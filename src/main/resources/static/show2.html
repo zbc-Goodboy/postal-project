@@ -53,7 +53,7 @@
         </tr>
         <tr class="k">
             <th>回复昵称:</th>
-            <td><input name="author" height="30" width="10" pattern="^[u4e00-u9fa5],{0,}$"></td>
+            <td><input name="author" height="30" width="10"></td>
         </tr>
         <tr class="k">
             <td colspan="2"><div id="add"><input type="submit" value="提交"><input  type="button" value="返回"></div></td>
@@ -78,7 +78,7 @@
                 $(this).val("匿名用户")
 
             }
-            if($(this)[0].validity.patternMismatch==true){
+            if($(this)[0].validity.patternMismatch==false){
                 $(this)[0].setCustomValidity("只能输入中文或不填");
             }
         })
