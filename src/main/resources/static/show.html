@@ -82,6 +82,10 @@
     var pages=0;
     var select="";
     $(function () {
+        $("#submit").click(function(){
+            select=$("input[name=title]").val()
+            show()
+        })
         $("body").on("click",".jhd",function(){
             var invid=$(this).attr("invid");
             $.ajax({

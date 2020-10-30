@@ -58,6 +58,7 @@ public class TestController {
         replyDetail.setCreatedate(new Date());
         replyDetail.setInvid(id);
         if (replyDetailService.add(replyDetail)>0){
+            //添加成功把语句存入session中
             session.setAttribute("message","添加回复成功");
         }
         return "redirect:/show1.html";
@@ -80,12 +81,15 @@ public class TestController {
     @RequestMapping("jhg")
     @ResponseBody
     public Object jhh(HttpSession session){
+        //加载取值，如果没有则返回null
         String message = (String) session.getAttribute("message");
         return message;
     }
+    //删除信息
     @RequestMapping("kjl")
     @ResponseBody
     public Object kjl(HttpSession session){
+        //如果有值则删除，防止页面刷新值依旧存在
         session.removeAttribute("message");
         return null;
     }
