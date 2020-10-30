@@ -56,7 +56,7 @@
             <th colspan="5"><p id="lie">回复信息列表</p><p id="fff"></p></th>
         </tr>
         <tr>
-            <th colspan="5"><div id="jnh"><a href="">添加回复</a><a href="show.html">返回帖子列表</a></div></th>
+            <th colspan="5"><div id="jnh"><a href="">添加回复</a><a href="/">返回帖子列表</a></div></th>
         </tr>
         <tr class="k">
             <td>回复内容</td>
@@ -68,5 +68,23 @@
 </html>
 <script src="jquery-2.2.4.js"></script>
 <script>
-
+    $(function(){
+        kjl()
+    })
+    function kjl(){
+        $.ajax({
+            url: "jhg",
+            dataType: "json",
+            success:function(data){
+                for (var i=0;i<data.length;i++){
+                    var tr=$("<tr class='kb'></tr>")
+                    var td1 =$("<td>"+data[i].content+"</td>")
+                    var td2 =$("<td>"+data[i].author+"</td>")
+                    var td3 =$("<td>"+data[i].createdate+"</td>")
+                    tr.append(td1).append(td2).append(td3)
+                    $("table").append(tr)
+                }
+            }
+        })
+    }
 </script>

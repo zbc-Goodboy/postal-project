@@ -82,6 +82,18 @@
     var pages=0;
     var select="";
     $(function () {
+        $("body").on("click",".jhd",function(){
+            var invid=$(this).attr("invid");
+            alert(invid)
+            $.ajax({
+                url: "watch",
+                data: "id="+invid,
+                dataType: "json",
+                success:function(){
+
+                }
+            })
+        })
         show()
         $("#kg>span:nth-of-type(1)").click(function () {
             pageNo=1;
@@ -131,7 +143,7 @@
                     var td2 =$("<td>"+data[i].summary+"</td>")
                     var td3 =$("<td>"+data[i].author+"</td>")
                     var td4 =$("<td>"+data[i].createdate+"</td>")
-                    var td6 =$("<th><span class='jhd' vinid='"+data[i].id+"'>查看回复</span></th>")
+                    var td6 =$("<th><span class='jhd' invid='"+data[i].id+"'>查看回复</span></th>")
                     tr.append(td1).append(td2).append(td3).append(td4).append(td6)
                     $("table").append(tr)
                 }
